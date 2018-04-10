@@ -6,6 +6,12 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">Dashboard</div>
+                <p>
+                    {{ Auth::user()->phone->phone_name }}
+                </p>
+                <p>
+
+                </p>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -76,8 +82,6 @@
 
 <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-
-
 <script>
 
     var pusher = new Pusher('8d58f12ccdbe64beb132', {
@@ -96,9 +100,7 @@
 <script>
 
     $( document ).ready(function() {
-
-
-
+        
         $("#tblInfo").on('click', '.delete', function () {
             $(this).closest('tr').remove();
             var id = $(this).data("id");
@@ -118,19 +120,13 @@
                     }
                 },
             });
-
-
         });
-
 
         $("#click").on("click",function(){
 
-
-
             var _token = $("input[name='_token']").val();
-
-           var fname =  $(".firstname").val();
-           var lname  =  $(".lastname").val();
+            var fname =  $(".firstname").val();
+            var lname  =  $(".lastname").val();
 
             $.ajax({
                 type: 'POST',

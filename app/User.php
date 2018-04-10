@@ -38,4 +38,14 @@ class User extends Authenticatable
         return [];
     }
 
+    /**
+     * User has one phone
+     */
+
+    public function phone(){
+        return $this->hasOne('App\Phone')->withDefault([
+            'phone_name' => 'dsadsadds'
+        ]);
+    }
+
 }

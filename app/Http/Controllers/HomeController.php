@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Info;
+use App\Phone;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
@@ -16,6 +18,7 @@ class HomeController extends Controller
      */
 
     public $set ="";
+
 
     public function __construct()
     {
@@ -31,6 +34,40 @@ class HomeController extends Controller
     public function index()
     {
         $info = new Info();
+       // $data = $info->get();
+
+        /***
+         * 2 query where in
+         * first init get age 8
+         * after that get age 10 depends on where IN
+         *
+         */
+        $qr1 = Info::where('age','=',8)
+                    ->orWhere(function ($q){
+                        $q->where('age','=','10');
+                        $q->whereIn('first_name',['N','P','O']);
+                    })
+            ->get()
+            ->toArray();
+
+        /***
+         *
+         * pluck row
+         *
+         */
+        $qr2 = Info::where('id',32)->pluck('first_name');
+
+        /**
+         * @eloquent
+         * user has one phone
+         * one is to one relationship
+         */
+
+
+
+
+
+
         return view('home',[
             'users'=>$info->getName()
         ]);
